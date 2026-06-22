@@ -64,8 +64,6 @@ export default function Home() {
 
       {result && (
 
-        
-
   <div className="border rounded p-6">
 
     <h2 className="text-2xl font-bold mb-4">
@@ -146,9 +144,7 @@ export default function Home() {
     </ul>
 
     <h3 className="mt-4 font-bold">Summary</h3>
-    <p className="whitespace-pre-wrap">
-  {result.analysis}
-</p>
+    
     <p>{result.summary}</p>
 
     <h3 className="mt-6 font-bold">Latest News</h3>
