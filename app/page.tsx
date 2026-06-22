@@ -33,23 +33,58 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen p-8">
-      <h1 className="text-4xl font-bold mb-6">
-        AI Investment Research Agent
+    <main className="min-h-screen bg-slate-950 text-white">
+      <div className="max-w-7xl mx-auto px-6">
+
+  <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen">
+
+    {/* Left Side */}
+    <div>
+
+      <span className="bg-green-500/20 text-green-400 px-3 py-1 rounded-full">
+        AI Powered Investment Research
+      </span>
+
+      <h1 className="text-6xl font-bold mt-6">
+        AI Investment
+        <br />
+        Research Agent
       </h1>
 
-      <div className="flex gap-3 mb-6">
+      <p className="text-slate-400 mt-6 text-xl">
+        Analyze stocks using AI, financial metrics,
+        market news and investment insights.
+      </p>
+
+      {/* Search Bar Here */}
+
+    </div>
+
+    {/* Right Side */}
+    <div>
+      <img
+        src="/hero.png"
+        alt="Investment"
+        className="w-full"
+      />
+    </div>
+
+  </div>
+
+</div>
+
+      <div className="flex gap-3 mt-8">
         <input
           type="text"
           placeholder="Enter company name"
           value={company}
           onChange={(e) => setCompany(e.target.value)}
-          className="border p-3 rounded w-80"
+          className="flex-1 bg-slate-900 border border-slate-700 p-4 rounded-xl"
         />
 
         <button
           onClick={analyzeCompany}
-          className="bg-black text-white px-5 py-3 rounded"
+          className="bg-green-500 hover:bg-green-600 px-8 rounded-xl font-semibold"
         >
           {loading ? (
   <div className="flex items-center gap-2">
@@ -64,7 +99,7 @@ export default function Home() {
 
       {result && (
 
-  <div className="border rounded p-6">
+  <div className="border rounded p-6max-w-7xl mx-auto mt-12 bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
 
     <h2 className="text-2xl font-bold mb-4">
       {result.company} ({result.ticker})
@@ -88,40 +123,52 @@ export default function Home() {
   </span>
 </p>
 
-    <p className="mb-4">
-      <strong>Confidence:</strong> {result.confidence}%
-    </p>
+    <div className="mt-4">
+
+  <div className="flex justify-between">
+    <span>Confidence</span>
+    <span>{result.confidence}%</span>
+  </div>
+
+  <div className="w-full bg-slate-700 h-3 rounded-full mt-2">
+    <div
+      className="bg-green-500 h-3 rounded-full"
+      style={{ width: `${result.confidence}%` }}
+    />
+  </div>
+
+</div>
 
     <div className="grid grid-cols-2 md:grid-cols-5 gap-4 my-6">
-      <div className="border p-3 rounded">
+      <div className="bg-slate-800 rounded-2xl p-5">
         <p className="text-sm">Current Price</p>
         <p className="font-bold">
           ${result.financials?.currentPrice}
         </p>
       </div>
 
-      <div className="border p-3 rounded">
+      <div className="bg-slate-800 rounded-2xl p-5">
         <p className="text-sm">Market Cap</p>
         <p className="font-bold">
           ${(result.financials?.marketCap / 1000000000).toFixed(0)}B
         </p>
       </div>
 
-      <div className="border p-3 rounded">
+      <div className="bg-slate-800 rounded-2xl p-5">
         <p className="text-sm">P/E Ratio</p>
         <p className="font-bold">
           {result.financials?.peRatio?.toFixed(2)}
         </p>
       </div>
 
-      <div className="border p-3 rounded">
+      <div className="bg-slate-800 rounded-2xl p-5">
         <p className="text-sm">52W High</p>
         <p className="font-bold">
           ${result.financials?.fiftyTwoWeekHigh}
         </p>
       </div>
 
-      <div className="border p-3 rounded">
+      <div className="bg-slate-800 rounded-2xl p-5">
         <p className="text-sm">52W Low</p>
         <p className="font-bold">
           ${result.financials?.fiftyTwoWeekLow}
@@ -129,39 +176,66 @@ export default function Home() {
       </div>
     </div>
 
-    <h3 className="mt-4 font-bold">Pros</h3>
-    <ul className="list-disc ml-6">
-      {result.pros?.map((item: string, index: number) => (
-        <li key={index}>{item}</li>
+    <div className="grid md:grid-cols-2 gap-6 mt-8">
+
+  <div className="bg-green-500/10 border border-green-500/20 p-5 rounded-2xl">
+    <h3 className="text-green-400 font-bold text-xl mb-3">
+      Pros
+    </h3>
+
+    <ul className="space-y-2">
+      {result.pros?.map((item, index) => (
+        <li key={index}>✅ {item}</li>
       ))}
     </ul>
+  </div>
 
-    <h3 className="mt-4 font-bold">Cons</h3>
-    <ul className="list-disc ml-6">
-      {result.cons?.map((item: string, index: number) => (
-        <li key={index}>{item}</li>
+  <div className="bg-red-500/10 border border-red-500/20 p-5 rounded-2xl">
+    <h3 className="text-red-400 font-bold text-xl mb-3">
+      Cons
+    </h3>
+
+    <ul className="space-y-2">
+      {result.cons?.map((item, index) => (
+        <li key={index}>❌ {item}</li>
       ))}
     </ul>
+  </div>
 
-    <h3 className="mt-4 font-bold">Summary</h3>
-    
-    <p>{result.summary}</p>
+</div>
 
-    <h3 className="mt-6 font-bold">Latest News</h3>
+   <div className="mt-8 bg-slate-800 rounded-2xl p-6">
 
-    <ul className="list-disc ml-6">
-      {result.news?.slice(0, 5).map((item: any, index: number) => (
-        <li key={index}>
-          <a
-            href={item.url}
-            target="_blank"
-            className="text-blue-500 underline"
-          >
-            {item.title}
-          </a>
-        </li>
-      ))}
-    </ul>
+  <h3 className="text-2xl font-bold mb-4">
+    AI Investment Analysis
+  </h3>
+
+  <p className="text-slate-300 whitespace-pre-wrap leading-8">
+    {result.analysis}
+  </p>
+
+</div>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+
+  {result.news?.slice(0,5).map((item,index) => (
+    <a
+      key={index}
+      href={item.url}
+      target="_blank"
+      className="bg-slate-800 p-5 rounded-2xl hover:bg-slate-700 transition"
+    >
+      <h4 className="font-semibold">
+        {item.title}
+      </h4>
+
+      <p className="text-green-400 mt-3">
+        Read More →
+      </p>
+    </a>
+  ))}
+
+</div>
 
   </div>
       )}
