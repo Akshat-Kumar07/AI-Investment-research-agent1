@@ -33,17 +33,35 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-white">
+    <main className="min-h-screen text-white">
+  
       <div className="max-w-7xl mx-auto px-6">
+<nav className="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md flex justify-between items-center py-6">
+  <h1
+  onClick={() =>
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    })
+  }
+  className="text-2xl font-bold text-green-400 cursor-pointer"
+>
+  📈 InvestAI
+</h1>
 
-  <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen">
+  <a
+    href="#analyze"
+    className="bg-green-500 hover:bg-green-600 px-5 py-2 rounded-xl font-semibold"
+  >
+    Analyze Now
+  </a>
+</nav>
+  <div 
+  id="analyze"
+  className="flex gap-12 items-center min-h-[85vh]">
 
     {/* Left Side */}
     <div>
-
-      <span className="bg-green-500/20 text-green-400 px-3 py-1 rounded-full">
-        AI Powered Investment Research
-      </span>
 
       <h1 className="text-6xl font-bold mt-6">
         AI Investment
@@ -57,23 +75,10 @@ export default function Home() {
       </p>
 
       {/* Search Bar Here */}
-
-    </div>
-
-    {/* Right Side */}
-    <div>
-      <img
-        src="/hero.png"
-        alt="Investment"
-        className="w-full"
-      />
-    </div>
-
-  </div>
-
-</div>
-
+      
       <div className="flex gap-3 mt-8">
+
+
         <input
           type="text"
           placeholder="Enter company name"
@@ -97,9 +102,24 @@ export default function Home() {
         </button>
       </div>
 
+    </div>
+
+    {/* Right Side */}
+    <div>
+      <img
+        src="/hero.png"
+        alt="Investment"
+        className="w-full rounded-3xl"
+      />
+    </div>
+
+  </div>
+
+      
+
       {result && (
 
-  <div className="border rounded p-6max-w-7xl mx-auto mt-12 bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
+  <div className="max-w-7xl mx-auto mt-12 bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
 
     <h2 className="text-2xl font-bold mb-4">
       {result.company} ({result.ticker})
@@ -140,35 +160,37 @@ export default function Home() {
 </div>
 
     <div className="grid grid-cols-2 md:grid-cols-5 gap-4 my-6">
-      <div className="bg-slate-800 rounded-2xl p-5">
+      <div className="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700 transition-all hover:scale-105">
         <p className="text-sm">Current Price</p>
         <p className="font-bold">
           ${result.financials?.currentPrice}
         </p>
       </div>
 
-      <div className="bg-slate-800 rounded-2xl p-5">
+      <div className="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700 transition-all hover:scale-105">
         <p className="text-sm">Market Cap</p>
         <p className="font-bold">
-          ${(result.financials?.marketCap / 1000000000).toFixed(0)}B
+          ${result.financials?.marketCap
+ ? `$${(result.financials.marketCap / 1000000000).toFixed(0)}B`
+ : "N/A"}
         </p>
       </div>
 
-      <div className="bg-slate-800 rounded-2xl p-5">
+      <div className="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700 transition-all hover:scale-105">
         <p className="text-sm">P/E Ratio</p>
         <p className="font-bold">
           {result.financials?.peRatio?.toFixed(2)}
         </p>
       </div>
 
-      <div className="bg-slate-800 rounded-2xl p-5">
+      <div className="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700 transition-all hover:scale-105">
         <p className="text-sm">52W High</p>
         <p className="font-bold">
           ${result.financials?.fiftyTwoWeekHigh}
         </p>
       </div>
 
-      <div className="bg-slate-800 rounded-2xl p-5">
+      <div className="bg-slate-800 rounded-2xl p-5 hover:bg-slate-700 transition-all hover:scale-105">
         <p className="text-sm">52W Low</p>
         <p className="font-bold">
           ${result.financials?.fiftyTwoWeekLow}
@@ -239,6 +261,7 @@ export default function Home() {
 
   </div>
       )}
+      </div> {/* max-w-7xl mx-auto px-6 */}
     </main>
   );
 }
