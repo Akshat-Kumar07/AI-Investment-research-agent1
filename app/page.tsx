@@ -115,33 +115,44 @@ export default function Home() {
 
   </div>
 
-      
+      {result?.error ? (
 
-      {result && (
+  <div className="max-w-7xl mx-auto mt-12">
+    <div className="bg-red-500/10 border border-red-500 p-6 rounded-2xl text-red-300">
+      AI analysis is temporarily unavailable.
+      Please try again in a few minutes.
+    </div>
+  </div>
+
+      ) : result && (
 
   <div className="max-w-7xl mx-auto mt-12 bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-2xl">
 
-    <h2 className="text-2xl font-bold mb-4">
+  <div className="flex items-center justify-between mb-6">
+    <h2 className="text-2xl font-bold">
       {result.company} ({result.ticker})
     </h2>
 
-    <p className="text-xl font-bold mb-2">
-  Verdict:
-  <span
-    className={
-      result.verdict === "INVEST"
-      ? "bg-green-600 text-white px-2 py-1 rounded"
-      : result.verdict === "SPECULATIVE_INVEST"
-      ? "bg-yellow-500 text-black px-2 py-1 rounded"
-      : result.verdict === "NEUTRAL"
-      ? "bg-blue-600 text-white px-2 py-1 rounded"
-      : "bg-red-600 text-white px-2 py-1 rounded"
-    }
-  >
-    {" "}
-    {result.verdict || "N/A"}
-  </span>
-</p>
+    <span
+      className={
+        result.verdict === "INVEST"
+          ? "bg-green-600 text-white px-4 py-2 rounded-full font-semibold"
+          : result.verdict === "SPECULATIVE_INVEST"
+          ? "bg-yellow-500 text-black px-4 py-2 rounded-full font-semibold"
+          : result.verdict === "NEUTRAL"
+          ? "bg-blue-600 text-white px-4 py-2 rounded-full font-semibold"
+          : "bg-red-600 text-white px-4 py-2 rounded-full font-semibold"
+      }
+    >
+      {result.verdict === "INVEST"
+        ? "🟢 INVEST"
+        : result.verdict === "SPECULATIVE_INVEST"
+        ? "🟡 SPECULATIVE INVEST"
+        : result.verdict === "NEUTRAL"
+        ? "🔵 NEUTRAL"
+        : "🔴 PASS"}
+    </span>
+  </div>
 
     <div className="mt-4">
 
