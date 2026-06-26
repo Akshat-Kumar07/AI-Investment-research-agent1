@@ -217,7 +217,7 @@ export default function Home() {
     </h3>
 
     <ul className="space-y-2">
-      {result.pros?.map((item, index) => (
+      {result.pros?.map((item:any, index:any):any => (
         <li key={index}>✅ {item}</li>
       ))}
     </ul>
@@ -229,7 +229,7 @@ export default function Home() {
     </h3>
 
     <ul className="space-y-2">
-      {result.cons?.map((item, index) => (
+      {result.cons?.map((item:any, index:any):any => (
         <li key={index}>❌ {item}</li>
       ))}
     </ul>
@@ -251,7 +251,7 @@ export default function Home() {
 
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
 
-  {result.news?.slice(0,5).map((item,index) => (
+  {result.news?.slice(0,5).map((item:any,index:any):any => (
     <a
       key={index}
       href={item.url}
