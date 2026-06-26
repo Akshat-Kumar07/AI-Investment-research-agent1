@@ -250,6 +250,48 @@ GET /api/test
 
 Checks whether the backend API is running correctly.
 
+## Challenges Faced
+
+During the development of this project, several technical challenges were encountered:
+
+* Integrating multiple external services (Google Gemini, Yahoo Finance, and Tavily Search) into a unified AI workflow.
+* Handling API failures and invalid company inputs gracefully.
+* Designing effective prompts to generate accurate, structured, and reliable investment reports.
+* Coordinating data retrieval and AI processing using LangChain and LangGraph.
+* Managing environment variables securely during local development and deployment on Vercel.
+* Optimizing response time while combining financial data, news, and AI-generated insights.
+
+---
+
+## Current Limitations
+
+* The application relies on external APIs and their availability.
+* The current free API quota supports **approximately 20 AI analysis requests per day**. Once the daily quota is exhausted, additional requests may fail until the quota resets or a higher-tier API plan is used.
+
+
+## Deployment
+
+The application is deployed on **Vercel**, providing fast, secure, and reliable hosting for the Next.js application.
+
+### Live Demo
+
+**🔗 Live Application:**
+https://ai-investment-research-agent1.vercel.app/
+
+### Deploy Your Own
+
+1. Fork or clone this repository.
+2. Push the project to your GitHub account.
+3. Import the repository into **Vercel**.
+4. Configure the required environment variables:
+
+   ```env
+   GOOGLE_API_KEY=your_google_gemini_api_key
+   TAVILY_API_KEY=your_tavily_api_key
+   ```
+5. Click **Deploy** and Vercel will automatically build and deploy the application.
+
+
 ## Future Enhancements
 
 The following features are planned for future releases to enhance the platform's capabilities:
